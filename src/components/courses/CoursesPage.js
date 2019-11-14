@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 class CoursesPage extends React.Component {
   state = {
     redirectToAddCoursePage: false,
-    search: ""
+    search: " "
   };
 
   componentDidMount() {
@@ -66,6 +66,7 @@ class CoursesPage extends React.Component {
               </>
             ) : (
               <>
+                <h5>Search</h5>
                 <input
                   type="text"
                   value={this.state.search}
@@ -128,7 +129,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);

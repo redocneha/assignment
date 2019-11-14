@@ -10,30 +10,32 @@ export default class TopStoriesPage extends React.Component {
     };
   }
   temp = [];
-  
 
   componentDidMount() {
-  Axios.get("https://hacker-news.firebaseio.com/v0/topstories.json").then(
+    Axios.get("https://hacker-news.firebaseio.com/v0/topstories.json").then(
       response => {
         console.log(response);
         let i = 0;
-        let promises=[];
+        let promises = [];
         for (i = 0; i < response.data.length; i++) {
-           promises.push(Axios.get(
-            "https://hacker-news.firebaseio.com/v0/item/" +
-              response.data[i] +
-              ".json"
-          ).then(res => {
-            console.log(res.data);
-            this.temp.push(res.data);
-          }));
+          promises.push(
+            Axios.get(
+              "https://hacker-news.firebaseio.com/v0/item/" +
+                response.data[i] +
+                ".json"
+            ).then(res => {
+              console.log(res.data);
+              this.temp.push(res.data);
+            })
+          );
         }
-       Axios.all( promises).then(         this.setState({
+        Axios.all(promises).then(
+          this.setState({
             topStoriesList: this.temp
-          }))
-        }
-        // console.log(this.state.topStoriesList);
-      
+          })
+        );
+      }
+      // console.log(this.state.topStoriesList);
     );
   }
 
